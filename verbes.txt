@@ -6,7 +6,7 @@
 (verbe être) Nous {sommes} à l’Alliance Française
 (verbe être) Vous {êtes} très intelligent
 (verbe être) Ils {sont} élèves
-(verbe être) Elles {sont} élèves très {intelligentes}
+(verbe être) Elles {sont} élèves très intelligentes
 
 (verbe avoir) J’{ai} une voiture
 (verbe avoir) Tu {as} un livre
