@@ -38,7 +38,10 @@ for phrase in phrases:
     print(f'DEBUG - queryPhrase = "{queryPhrase}", word = "{word}"')
 '''
 phrase = random.choice(phrases)
+hits = 0
+misses = 0
 while True:
+    print('----------------------------------------------------')
     fillers = getFillers(phrase)
     #rint(f'DEBUG - fillers = {fillers}')
     index = random.choice(range(len(fillers)))
@@ -48,10 +51,13 @@ while True:
     cand = input()
     if cand.strip() == word:
         print('Correto!')
+        hits += 1
         phrase = random.choice(phrases)
     else: 
         print(f'Errado. o correto é "{word}"')
-
+        misses += 1
+    total = misses + hits
+    print(f'{hits} acertos de {total}: ({(hits/total):.2%}) ')
 
 
 
