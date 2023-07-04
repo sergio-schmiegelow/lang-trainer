@@ -48,4 +48,12 @@
 (verbe venir) Ils {viennent} d’Africa
 (verbe venir) Elles {viennent} d’Africa
 
-
+(verbe aimer) J'{aime} le Français
+(verbe aimer) Tu {aimes} le chocolat
+(verbe aimer) Il {aime} la musique
+(verbe aimer) Elle {aime} la musique
+(verbe aimer) on {aime} la musique
+(verbe aimer) Nous {aimons} voyager
+(verbe aimer) Vous {aimez} voyager
+(verbe aimer) Ils {aiment} la cuisine Brésilienne
+(verbe aimer) Elles {aiment} la cuisine Brésilienne
