@@ -10,7 +10,7 @@ def getFillers(phrase):
         matches.append([res.start(), res.end()])
     return matches
 #-------------------------------------------------------------------------
-def getQuery(phrase, fillers, index):
+def buildQuery(phrase, fillers, index):
     #extract the filler
     start, end = fillers[index]
     word = phrase[start + 1: end - 1]
@@ -19,6 +19,12 @@ def getQuery(phrase, fillers, index):
     queryPhrase = queryPhrase.replace('{', '')
     queryPhrase = queryPhrase.replace('}', '')
     return queryPhrase, word
+#-------------------------------------------------------------------------
+def generateQuery(phrases):
+    phrase = random.choice(phrases)
+    fillers = getFillers(phrase)
+    index = random.choice(range(len(fillers)))
+    return buildQuery(phrase, fillers, index)
 #-------------------------------------------------------------------------
 phrases = []
 for dataFilename in sys.argv[1:]:
@@ -29,30 +35,18 @@ for dataFilename in sys.argv[1:]:
             line = line.strip()
             if len(line.strip()) > 0:
                 phrases.append(line.strip())
-'''
-for phrase in phrases:
-    print(f'DEBUG - phrase = {phrase}')
-    fillers = getFillers(phrase)
-    print(f'DEBUG - fillers = {fillers}')
-    queryPhrase, word  = getQuery(phrase, fillers, 0)
-    print(f'DEBUG - queryPhrase = "{queryPhrase}", word = "{word}"')
-'''
-phrase = random.choice(phrases)
+random.shuffle(phrases)
 hits = 0
 misses = 0
+queryPhrase, word = generateQuery(phrases)
 while True:
-    fillers = getFillers(phrase)
-    #rint(f'DEBUG - fillers = {fillers}')
-    index = random.choice(range(len(fillers)))
-    queryPhrase, word  = getQuery(phrase, fillers, index)
-    #print(f'DEBUG - queryPhrase = "{queryPhrase}", word = "{word}"')
     print('----------------------------------------------------')
     print(queryPhrase)
     cand = input()
-    if cand.strip() == word:
+    if cand.strip().lower() == word.lower():
         print('Correto!')
         hits += 1
-        phrase = random.choice(phrases)
+        queryPhrase, word = generateQuery(phrases)
     else: 
         print(r'\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\')
         print(f'Errado. o correto é "{word}"')
