@@ -1,0 +1,32 @@
+(famille) le {père} de mon {père} est mon {grand-père}
+(famille) la {mère} de mon {père} est ma {grand-mère}
+(famille) le {père} de ma {mère} est mon {grand-père}
+(famille) la {mère} de mon {père} est ma {grand-mère}
+(famille) la {soeur} de mon {père} est ma {tante}
+(famille) la {soeur} de ma {mère} est ma {tante}
+(famille) le {frère} de mon {père} est mon {oncle}
+(famille) le {frère} de ma {mère} est mon {oncle}
+(famille) le {fils} de ma {tante} est mon {cousin}
+(famille) le {fils} de mon {oncle} est mon {cousin}
+(famille) la {fille} de ma {tante} est ma {cousine}
+(famille) la {fille} de mon {oncle} est ma {cousine}
+(famille) le {fils} de ma {femme} est mon {beau-fils}
+(famille) la {fille} de ma {femme} est ma {belle-fille}
+(famille) le {fils} de mon {mari} est mon {beau-fils}
+(famille) la {fille} de mon {mari} est ma {belle-fille}
+(famille) la {femme} de mon {fils} est ma {belle-fille}
+(famille) le {mari} de ma {fille} est mon {beau-fils}
+(famille) la {mère} de ma {femme} est ma {belle-mère}
+(famille) le {père} de ma {femme} est mon {beau-père}
+(famille) la {mère} de mon {mari} est ma {belle-mère}
+(famille) le {père} de mon {mari} est mon {beau-père}
+(famille) le {fils} de ma {mère} et de mon {père} est mon {frère}
+(famille) la {fille} de ma {mère} et de mon {père} est ma {soeur}
+(famille) le {fils} de mon {frère} est mon {neveu}
+(famille) le {fils} de ma {soeur} est mon {neveu}
+(famille) la {fille} de ma {soeur} est ma {nièce}
+(famille) la {fille} de mon {frère} est ma {nièce}
+(famille) le {fils} de mon {fils} est mon {petit-fils}
+(famille) le {fils} de ma {fille} est mon {petit-fils}
+(famille) la {fille} de mon {fils} est ma {petite-fille}
+(famille) la {fille} de ma {fille} est ma {petite-fille}
