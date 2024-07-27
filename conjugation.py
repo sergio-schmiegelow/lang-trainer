@@ -1,6 +1,7 @@
 
 #https://github.com/bretttolbert/verbecc
 import json
+from unidecode import unidecode
 from verbecc import Conjugator
 #-------------------------------------------------------------------------
 class regVerbesClass:
@@ -9,7 +10,7 @@ class regVerbesClass:
         with open('verbes_reguliers.txt', 'rt') as f:
             lines = f.readlines()
         self.verbsList = [l.strip() for l in lines if len(l)>2]
-        self.regularVerbsList = [v for v in self.verbsList if self.parseVerb(v)[2] in [1, 2]]
+        self.regularVerbsList = [self.convertChars(v) for v in self.verbsList if self.parseVerb(v)[2] in [1, 2]]
         self.peopleDict = {'je':0, 
                            'tu':1, 
                            'il':2,
@@ -27,27 +28,22 @@ class regVerbesClass:
         self.pronomsVowel = ["m'", "t'", "s'", "nous ", "vous ", "s'"]
         self.vowels = ['a', 'e', 'i', 'o', 'u']
         self.cg = Conjugator(lang='fr')
+    #--------------------------------------------------------------------
+    def convertChars(self, verb):
+        return verb.replace('œ', 'oe')
     #--------------------------------------------------------------------        
     def getConjugations(self, verb):
-        '''
-        r = requests.get(f'http://verbe.cc/verbecc/conjugate/fr/{verb}')
-        if r.status_code != 200:
-            print('ERROR in REST API request')
-            return None
-        #if r.headers['content-type'] != 'application/json; charset=utf8':
-        if r.encoding != 'utf-8':
-            print('ERROR not utf-8')
-            return None
-        isPronominal, radical, group = self.parseVerb(verb)
-        
-        rj = r.json()
-        '''
         conjugations = {}
-        conjDict = self.cg.conjugate(verb)
-
+        try:
+            conjDict = self.cg.conjugate(verb)
+        except:
+            return None
+        #print(f'DEBUG - conjDict = {json.dumps(conjDict, indent=2)}')
         present = conjDict['moods']['indicatif']['présent']
-        print(f'DEBUG - present = {present}')
-        present = [self.separateConjugateVerb(p) for p in present]
+        if len(present) != 6:
+            return None
+        #print(f'DEBUG - present = {present}')
+        #present = [self.separateConjugateVerb(p) for p in present]
         conjugations['présent'] = present
         return conjugations
     #--------------------------------------------------------------------
@@ -79,25 +75,67 @@ class regVerbesClass:
             verb = verb[2:]
         return verb
     #--------------------------------------------------------------------
-    def buildPersonVerbe(self, verb, tense, person):
+    def buildPersonVerb(self, verb, tense, person):
         isPronominal, radical, group = self.parseVerb(verb)
-        print(f'DEBUG - radical = {radical}')
-        startVowel =  radical.startswith(tuple(self.vowels))
+        startVowel =  unidecode(radical).startswith(tuple(self.vowels))
         conjugations = self.getConjugations(verb)[tense]
+        if conjugations is None:
+            return None
         personIndex = self.peopleDict[person]
         conjugatedWithPerson = conjugations[personIndex]
         conjugated = self.separateConjugateVerb(conjugatedWithPerson)
-        outString = person + ' '
         if isPronominal:
+            outString = person + ' '
             if startVowel:
-                outString += self.pronomsVowel[personIndex] + ' '
+                outString += self.pronomsVowel[personIndex]
             else:
-                outString += self.pronoms[personIndex] + ' '
+                outString += self.pronoms[personIndex]
+        else: #non pronominal
+            if startVowel:
+                outString = self.peopleVowel[self.people.index(person + ' ')]
+            else:
+                outString = person + ' '
         outString += conjugated
         return outString
+    #--------------------------------------------------------------------
+    def testVerb(self, verb):
+        print(f'DEBUG - verb = {verb}')
+        people = ['je', 'tu', 'il', 'nous', 'vous', 'ils']
+        conjugations = self.getConjugations(verb)
+        if conjugations is None:
+            return None
+        presentList = conjugations['présent']
+        syntheticPresentList =[self.buildPersonVerb(verb, 'présent', person) for person in people]
+        print(f'DEBUG - presentList          = {presentList}')
+        print(f'DEBUG - syntheticPresentList = {syntheticPresentList}')
+        if presentList == syntheticPresentList:
+            print('Ok')
+            return 0
+        else:
+            print('Fail')
+            return 1
+            
+    #--------------------------------------------------------------------
+    def testAllVerbs(self):
+        matches = 0
+        nonSupported = 0
+        fails = 0
+        for verb in self.regularVerbsList:
+            res = self.testVerb(verb)
+            if res is None:
+                nonSupported += 1
+                quit()
+            elif res == 0:
+                matches += 1
+            else:
+                fails += 1
+                quit()
+            print(f'matches = {matches}, fails = {fails}, nonSupported = {nonSupported}')
+
 #-------------------------------------------------------------------------
 rv = regVerbesClass()
-print(rv.buildPersonVerbe('manger', 'présent', 'je'))
+rv.testAllVerbs()
+rv.testVerb('manger')
 quit()
 rv.getConjugations('manger')
 rv.getConjugations('aimer')
