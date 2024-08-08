@@ -1,6 +1,7 @@
 
 #https://github.com/bretttolbert/verbecc
 import json
+import random
 from unidecode import unidecode
 from verbecc import Conjugator
 #-------------------------------------------------------------------------
@@ -27,6 +28,8 @@ class regVerbesClass:
         self.pronoms =      ['me ', 'te ', 'se ', 'nous ', 'vous ', 'se ']
         self.pronomsVowel = ["m'", "t'", "s'", "nous ", "vous ", "s'"]
         self.vowels = ['a', 'e', 'i', 'o', 'u']
+        self.passeComposePeople = ["j'ai", 'tu as', 'il a', 'elle a', 'on a', 'nous avons', 'vous avez', 'ils ont', 'elles ont']
+        self.complements = {'présent':["aujourd'hui", "maintenant"]}
         self.cg = Conjugator(lang='fr')
     #--------------------------------------------------------------------
     def convertChars(self, verb):
@@ -36,8 +39,10 @@ class regVerbesClass:
         conjugations = {}
         try:
             conjDict = self.cg.conjugate(verb)
+            #print(f'DEBUG - conjDict = {json.dumps(conjDict, indent = 2)}')
         except:
             return None
+        conjugations['english'] = conjDict['verb']['translation_en']
         #print(f'DEBUG - conjDict = {json.dumps(conjDict, indent=2)}')
         present = conjDict['moods']['indicatif']['présent']
         if len(present) != 6:
@@ -114,7 +119,6 @@ class regVerbesClass:
         else:
             print('Fail')
             return 1
-            
     #--------------------------------------------------------------------
     def testAllVerbs(self):
         matches = 0
@@ -131,13 +135,36 @@ class regVerbesClass:
                 fails += 1
                 quit()
             print(f'matches = {matches}, fails = {fails}, nonSupported = {nonSupported}')
-
+    #-------------------------------------------------------------------- 
+    def createQuery(self, verbe, person, tense):
+        conjugations = self.getConjugations(verbe)
+        conjTense = conjugations[tense]
+        conjugationIndex = self.peopleDict[person]
+        conjugated = conjTense[conjugationIndex]
+        if person in ['elle', 'on', 'elles']:
+            conjugated = person + ' ' + ' '.join(conjugated.split(' ')[1:])
+        query =  f'verbe: {verbe} ({conjugations["english"]})\n'
+        query += f'personne: {person}\n'
+        query += f'temp: {tense}\n'
+        query += f'___________ {random.choice(self.complements[tense])}'
+        answer = conjugated
+        return query, answer
 #-------------------------------------------------------------------------
 rv = regVerbesClass()
-rv.testAllVerbs()
-rv.testVerb('manger')
-quit()
-rv.getConjugations('manger')
-rv.getConjugations('aimer')
-rv.getConjugations('se brosser')
-rv.getConjugations("s'appeler")
+for verb in rv. regularVerbsList:
+    for person in rv.peopleDict.keys():
+        print('-------------------------------------')
+        query, answer = rv.createQuery(verb, person,'présent')
+        print(query)
+        print(answer)
+#print(rv.getConjugations("s'appeler"))
+
+#rv.testAllVerbs()
+'''
+verbe: manger
+personne: je
+temp: présent
+
+_____ aujourd'hui
+'''
+
