@@ -1,6 +1,7 @@
 import re
 import sys
 import random
+from conjugation import regVerbesClass
 QUERY_SPACE = '___'
 #-------------------------------------------------------------------------
 def getFillers(phrase):
@@ -26,6 +27,28 @@ def generateQuery(phrases):
     index = random.choice(range(len(fillers)))
     return buildQuery(phrase, fillers, index)
 #-------------------------------------------------------------------------
+verbGen = regVerbesClass()
+hits = 0
+misses = 0
+query, answers, hint = verbGen.getQuery()
+while True:
+    print('----------------------------------------------------')
+    print(query)
+    cand = input()
+    if cand.strip().lower() in answers:
+        print('Correct!')
+        hits += 1
+        query, answers, hint = verbGen.getQuery()
+    else: 
+        print(r'\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\')
+        print(f'Faux. Le bon est "{answers[0]}"')
+        misses += 1
+        print('////////////////////////////////////////////////////')
+    total = misses + hits
+    print(f'{hits} correct sur {total}: ({(hits/total):.2%}) \n')
+
+quit()
+
 phrases = []
 for dataFilename in sys.argv[1:]:
     #print(f'DEBUG dataFilename = {dataFilename}')
@@ -38,6 +61,8 @@ for dataFilename in sys.argv[1:]:
 random.shuffle(phrases)
 hits = 0
 misses = 0
+
+
 queryPhrase, word = generateQuery(phrases)
 while True:
     print('----------------------------------------------------')

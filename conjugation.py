@@ -8,6 +8,7 @@ from verbecc import Conjugator
 class regVerbesClass:
     #---------------------------------------------------------------------
     def __init__(self):
+        self.tenses = ['présent', 'passé-composé', 'futur-proxe']
         with open('verbes_reguliers.txt', 'rt') as f:
             lines = f.readlines()
         self.verbsList = [l.strip() for l in lines if len(l)>2]
@@ -29,7 +30,9 @@ class regVerbesClass:
         self.pronomsVowel = ["m'", "t'", "s'", "nous ", "vous ", "s'"]
         self.vowels = ['a', 'e', 'i', 'o', 'u']
         self.passeComposePeople = ["j'ai", 'tu as', 'il a', 'elle a', 'on a', 'nous avons', 'vous avez', 'ils ont', 'elles ont']
-        self.complements = {'présent':["aujourd'hui", "maintenant"]}
+        self.complements = {'présent':["aujourd'hui", "maintenant"],
+                            'passé-composé':['hier', 'la semaine dernière', 'le mois dernier', "l'année dernière"],
+                            'futur-proxe':['demain', 'après-demain', 'la semaine prochaine', 'vais le mois prochain', "l'année prochaine"]}
         self.cg = Conjugator(lang='fr')
     #--------------------------------------------------------------------
     def convertChars(self, verb):
@@ -42,15 +45,35 @@ class regVerbesClass:
             #print(f'DEBUG - conjDict = {json.dumps(conjDict, indent = 2)}')
         except:
             return None
+        conjugations['infinitive'] = verb
         conjugations['english'] = conjDict['verb']['translation_en']
         #print(f'DEBUG - conjDict = {json.dumps(conjDict, indent=2)}')
-        present = conjDict['moods']['indicatif']['présent']
-        if len(present) != 6:
-            return None
-        #print(f'DEBUG - present = {present}')
-        #present = [self.separateConjugateVerb(p) for p in present]
-        conjugations['présent'] = present
+        for tense in ['présent', 'passé-composé']:
+            conj = conjDict['moods']['indicatif'][tense]
+            if len(conj) != 6:
+               return None
+            conjugations[tense] = conj
+        self.generateFuturProxe(conjugations)
+        #print(f'DEBUG - conjugations = {conjugations}')
         return conjugations
+    #--------------------------------------------------------------------
+    def generateFuturProxe(self, conjugations):
+        infinitive = conjugations['infinitive']
+        isPronominal, radical, group = self.parseVerb(infinitive)
+        if isPronominal:
+            conjugations['futur-proxe'] = ['je vais me '      + infinitive,
+                                           'tu vas te '       + infinitive,
+                                           'il va se '        + infinitive,
+                                           'nous allon nous ' + infinitive,
+                                           'vous allez vous ' + infinitive,
+                                           'ils vont se'      + infinitive]
+        else:
+            conjugations['futur-proxe'] = ['je vais '    + infinitive,
+                                           'tu vas '     + infinitive,
+                                           'il va '      + infinitive,
+                                           'nous allon ' + infinitive,
+                                           'vous allez ' + infinitive,
+                                           'ils vont '   + infinitive]
     #--------------------------------------------------------------------
     def parseVerb(self, verb):
         if verb.startswith("s'"):
@@ -136,35 +159,35 @@ class regVerbesClass:
                 quit()
             print(f'matches = {matches}, fails = {fails}, nonSupported = {nonSupported}')
     #-------------------------------------------------------------------- 
-    def createQuery(self, verbe, person, tense):
-        conjugations = self.getConjugations(verbe)
+    def createDefinedQuery(self, verb, person, tense):
+        conjugations = self.getConjugations(verb)
         conjTense = conjugations[tense]
         conjugationIndex = self.peopleDict[person]
         conjugated = conjTense[conjugationIndex]
         if person in ['elle', 'on', 'elles']:
             conjugated = person + ' ' + ' '.join(conjugated.split(' ')[1:])
-        query =  f'verbe: {verbe} ({conjugations["english"]})\n'
+        query =  f'verbe: {verb} ({conjugations["english"]})\n'
         query += f'personne: {person}\n'
         query += f'temp: {tense}\n'
         query += f'___________ {random.choice(self.complements[tense])}'
         answer = conjugated
         return query, answer
+    #-------------------------------------------------------------------------
+    def getQuery(self):
+        verb   = random.choice(self.regularVerbsList)
+        person = random.choice(list(self.peopleDict.keys()))
+        tense  = random.choice(self.tenses)
+        query, answer = self.createDefinedQuery(verb, person, tense)
+        hint = None
+        return query, [answer], hint
 #-------------------------------------------------------------------------
-rv = regVerbesClass()
-for verb in rv. regularVerbsList:
-    for person in rv.peopleDict.keys():
-        print('-------------------------------------')
-        query, answer = rv.createQuery(verb, person,'présent')
-        print(query)
-        print(answer)
-#print(rv.getConjugations("s'appeler"))
-
-#rv.testAllVerbs()
-'''
-verbe: manger
-personne: je
-temp: présent
-
-_____ aujourd'hui
-'''
+if __name__ == '__main__':
+    rv = regVerbesClass()
+    for verb in rv. regularVerbsList:
+        for person in rv.peopleDict.keys():
+            print('-------------------------------------')
+            query, answer = rv.createDefinedQuery(verb, person,'présent')
+            print(query)
+            print(answer)
+    
 
