@@ -1,0 +1,142 @@
+{
+  "manger": {
+    "présent": {
+      "je": "je mange",
+      "tu": "tu manges",
+      "il": "il mange",
+      "elle": "elle mange",
+      "on": "on mange",
+      "nous": "nous mangeons",
+      "vous": "vous mangez",
+      "ils": "ils mangent",
+      "elles": "elles mangent"
+    },
+    "passé-composé": {
+      "je": "j'ai mangé",
+      "tu": "tu as mangé",
+      "il": "il a mangé",
+      "elle": "elle a mangé",
+      "on": "on a mangé",
+      "nous": "nous avons mangé",
+      "vous": "vous avez mangé",
+      "ils": "ils ont mangé",
+      "elles": "elles ont mangé"
+    },
+    "futur-proxe": {
+      "je": "je vais manger",
+      "tu": "tu vas manger",
+      "il": "il va manger",
+      "elle": "elle va manger",
+      "on": "on va manger",
+      "nous": "nous allon manger",
+      "vous": "vous allez manger",
+      "ils": "ils vont manger",
+      "elles": "elles vont manger"
+    }
+  },
+  "aimer": {
+    "présent": {
+      "je": "j'aime",
+      "tu": "tu aimes",
+      "il": "il aime",
+      "elle": "elle aime",
+      "on": "on aime",
+      "nous": "nous aimons",
+      "vous": "vous aimez",
+      "ils": "ils aiment",
+      "elles": "elles aiment"
+    },
+    "passé-composé": {
+      "je": "j'ai aimé",
+      "tu": "tu as aimé",
+      "il": "il a aimé",
+      "elle": "elle a aimé",
+      "on": "on a aimé",
+      "nous": "nous avons aimé",
+      "vous": "vous avez aimé",
+      "ils": "ils ont aimé",
+      "elles": "elles ont aimé"
+    },
+    "futur-proxe": {
+      "je": "je vais aimer",
+      "tu": "tu vas aimer",
+      "il": "il va aimer",
+      "elle": "elle va aimer",
+      "on": "on va aimer",
+      "nous": "nous allon aimer",
+      "vous": "vous allez aimer",
+      "ils": "ils vont aimer",
+      "elles": "elles vont aimer"
+    }
+  },
+  "se brosser": {
+    "présent": {
+      "je": "je me brosse",
+      "tu": "tu te brosses",
+      "il": "il se brosse",
+      "elle": "elle se brosse",
+      "on": "on se brosse",
+      "nous": "nous nous brossons",
+      "vous": "vous vous brossez",
+      "ils": "ils se brossent",
+      "elles": "elles se brossent"
+    },
+    "passé-composé": {
+      "je": "je me suis brossé",
+      "tu": "tu t'es brossé",
+      "il": "il s'est brossé",
+      "elle": "elle s'est brossé",
+      "on": "on s'est brossé",
+      "nous": "nous nous sommes brossés",
+      "vous": "vous vous êtes brossés",
+      "ils": "ils se sont brossés",
+      "elles": "elles se sont brossés"
+    },
+    "futur-proxe": {
+      "je": "je vais me brosser",
+      "tu": "tu vas te brosser",
+      "il": "il va se brosser",
+      "elle": "elle va se brosser",
+      "on": "on va se brosser",
+      "nous": "nous allon nous brosser",
+      "vous": "vous allez vous brosser",
+      "ils": "ils vont se brosser",
+      "elles": "elles vont se brosser"
+    }
+  },
+  "s'appeler": {
+    "présent": {
+      "je": "je m'appelle",
+      "tu": "tu t'appelles",
+      "il": "il s'appelle",
+      "elle": "elle s'appelle",
+      "on": "on s'appelle",
+      "nous": "nous nous appelons",
+      "vous": "vous vous appelez",
+      "ils": "ils s'appellent",
+      "elles": "elles s'appellent"
+    },
+    "passé-composé": {
+      "je": "je me suis appelé",
+      "tu": "tu t'es appelé",
+      "il": "il s'est appelé",
+      "elle": "elle s'est appelé",
+      "on": "on s'est appelé",
+      "nous": "nous nous sommes appelés",
+      "vous": "vous vous êtes appelés",
+      "ils": "ils se sont appelés",
+      "elles": "elles se sont appelés"
+    },
+    "futur-proxe": {
+      "je": "je vais m'appeler",
+      "tu": "tu vas t'appeler",
+      "il": "il va s'appeler",
+      "elle": "elle va s'appeler",
+      "on": "on va s'appeler",
+      "nous": "nous allon nous appeler",
+      "vous": "vous allez vous appeler",
+      "ils": "ils vont s'appeler",
+      "elles": "elles vont s'appeler"
+    }
+  }
+}
