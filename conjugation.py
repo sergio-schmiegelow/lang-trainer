@@ -31,7 +31,7 @@ class regVerbesClass:
         self.passeComposePeople = ["j'ai", 'tu as', 'il a', 'elle a', 'on a', 'nous avons', 'vous avez', 'ils ont', 'elles ont']
         self.complements = {'présent':["aujourd'hui", "maintenant"],
                             'passé-composé':['hier', 'la semaine dernière', 'le mois dernier', "l'année dernière"],
-                            'futur-proxe':['demain', 'après-demain', 'la semaine prochaine', 'vonle mois prochain', "l'année prochaine"]}
+                            'futur-proxe':['demain', 'après-demain', 'la semaine prochaine', 'le mois prochain', "l'année prochaine"]}
         self.cg = Conjugator(lang='fr')
     #--------------------------------------------------------------------
     def convertChars(self, verb):
