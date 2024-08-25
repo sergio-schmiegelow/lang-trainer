@@ -1,5 +1,6 @@
 
 #https://github.com/bretttolbert/verbecc
+import csv
 import json
 import random
 from unidecode import unidecode
@@ -9,10 +10,10 @@ class regVerbesClass:
     #---------------------------------------------------------------------
     def __init__(self):
         self.tenses = ['présent', 'passé-composé', 'futur-proxe']
-        with open('verbes_reguliers.txt', 'rt') as f:
-            lines = f.readlines()
-        self.verbsList = [l.strip() for l in lines if len(l)>2]
-        self.regularVerbsList = [self.convertChars(v) for v in self.verbsList if self.parseVerb(v)[2] in [1, 2]]
+        with open('verbs_translations.csv', 'rt') as f:
+            reader = csv.DictReader(f)
+            ptTransDict = {row['french']:row['portuguese'] for row in reader}
+        self.regularVerbsList = [self.convertChars(v) for v in ptTransDict.keys() if self.parseVerb(v)[2] in [1, 2]]
         self.peopleDict = {'je':0, 
                            'tu':1, 
                            'il':2,
