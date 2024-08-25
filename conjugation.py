@@ -12,8 +12,8 @@ class regVerbesClass:
         self.tenses = ['présent', 'passé-composé', 'futur-proxe']
         with open('verbs_translations.csv', 'rt') as f:
             reader = csv.DictReader(f)
-            ptTransDict = {row['french']:row['portuguese'] for row in reader}
-        self.regularVerbsList = [self.convertChars(v) for v in ptTransDict.keys() if self.parseVerb(v)[2] in [1, 2]]
+            self.ptTransDict = {row['french']:row['portuguese'] for row in reader}
+        self.regularVerbsList = [self.convertChars(v) for v in self.ptTransDict.keys() if self.parseVerb(v)[2] in [1, 2]]
         self.peopleDict = {'je':0, 
                            'tu':1, 
                            'il':2,
@@ -115,7 +115,7 @@ class regVerbesClass:
     #--------------------------------------------------------------------
     def createDefinedQuery(self, verb, person, tense):
         conjugated = self.getDefinedConjugation( verb, tense, person)
-        query =  f'verbe: {verb} ({self.getConjugations(verb)["english"]})\n'
+        query =  f'verbe: {verb} (en:{self.getConjugations(verb)["english"]} | pt:{self.ptTransDict[verb]})\n'
         query += f'personne: {person}\n'
         query += f'temp: {tense}\n'
         query += f'___________ {random.choice(self.complements[tense])}'
