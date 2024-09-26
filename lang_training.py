@@ -21,20 +21,23 @@ class templateQueryGeneratorClass:
             matches.append([res.start(), res.end()])
         return matches
     #-------------------------------------------------------------------------
+    def removeBraces(self, text):
+        return text.replace('{', '').replace('}', '')
+    #-------------------------------------------------------------------------
     def getDefinedQuery(self, phrase, fillers, index):
         #extract the filler
         start, end = fillers[index]
         answer = phrase[start + 1: end - 1]
         #replace the filler
-        queryPhrase = phrase[:start] + QUERY_SPACE + phrase[end:]
-        queryPhrase = queryPhrase.replace('{', '')
-        queryPhrase = queryPhrase.replace('}', '')
-        if queryPhrase.startswith('('):
-            parClose = queryPhrase.index(')')
-            query = queryPhrase[1: parClose] + '\n' + queryPhrase[parClose + 1:].strip()
+        prePhrase  = self.removeBraces(phrase[:start])
+        postPhrase = self.removeBraces(phrase[end:])
+        if prePhrase.startswith('('):
+            parClose = prePhrase.index(')')
+            statement = prePhrase[1: parClose]
+            prePhrase = prePhrase[parClose + 1:].strip()
         else:
-            query = queryPhrase
-        return query, [answer.lower()], ''
+            statement = ''
+        return statement, prePhrase, [answer.lower()], postPhrase, None
     #-------------------------------------------------------------------------
     def getQuery(self):
         phrase = random.choice(self.phrases)
@@ -42,62 +45,45 @@ class templateQueryGeneratorClass:
         index = random.choice(range(len(fillers)))
         return self.getDefinedQuery(phrase, fillers, index)
 #-------------------------------------------------------------------------
-generators = []
-generators.append(regVerbesClass())
-generators.append(templateQueryGeneratorClass('interrogatif.ltr'))
-generators.append(templateQueryGeneratorClass('famille.ltr'))
-generators.append(templateQueryGeneratorClass('genres.ltr'))
-hits = 0
-misses = 0
-query, answers, hint = random.choice(generators).getQuery()
-while True:
-    print('----------------------------------------------------')
-    print(query)
-    cand = input()
-    if cand.strip().lower() in answers:
-        print('Correct!')
-        hits += 1
-        query, answers, hint = random.choice(generators).getQuery()
-    else: 
-        print(r'\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\')
-        print(f'Faux. Le bon est "{answers[0]}"')
-        misses += 1
-        print('////////////////////////////////////////////////////')
-    total = misses + hits
-    print(f'{hits} correct sur {total}: ({(hits/total):.2%}) \n')
+class queryGeneratorClass:
+    #---------------------------------------------------------------------
+    def __init__(self):
+        self.sources = []
+        self.weights = []
+    #---------------------------------------------------------------------
+    def addSource(self, source, weight):
+        self.sources.append(source)
+        self.weights.append(weight)
+    #---------------------------------------------------------------------
+    def getQuery(self):
+        return random.choices(self.sources, weights = self.weights)[0].getQuery()
+#-------------------------------------------------------------------------
+if __name__ == '__main__':
+    generator = queryGeneratorClass()
+    generator.addSource(regVerbesClass(),                                  1)
+    #generator.addSource(templateQueryGeneratorClass('interrogatif.ltr'),   3)
+    #generator.addSource(templateQueryGeneratorClass('famille.ltr'),        3)
+    #generator.addSource(templateQueryGeneratorClass('genres.ltr'),         3)
+    hits = 0
+    misses = 0
+    statement, prePhrase, answers, postPhrase, hint = generator.getQuery()
+    while True:
+        print('----------------------------------------------------')
+        query = statement + '\n' + prePhrase + ' ' + QUERY_SPACE + postPhrase
+        print(query)
+        cand = input()
+        if True:#cand.strip().lower() in answers:
+            print('Correct!')
+            hits += 1
+            statement, prePhrase, answers, postPhrase, hint = generator.getQuery()
+        else: 
+            print(r'\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\')
+            print(f'Faux. Le bon est "{answers[0]}"')
+            misses += 1
+            print('////////////////////////////////////////////////////')
+        total = misses + hits
+        print(f'{hits} correct sur {total}: ({(hits/total):.2%}) \n')
 
-quit()
-
-phrases = []
-for dataFilename in sys.argv[1:]:
-    #print(f'DEBUG dataFilename = {dataFilename}')
-    with open(dataFilename) as fp:
-        lines = fp.readlines()
-        for line in lines:
-            line = line.strip()
-            if len(line.strip()) > 0:
-                phrases.append(line.strip())
-random.shuffle(phrases)
-hits = 0
-misses = 0
-
-
-queryPhrase, word = generateQuery(phrases)
-while True:
-    print('----------------------------------------------------')
-    print(queryPhrase)
-    cand = input()
-    if cand.strip().lower() == word.lower():
-        print('Correto!')
-        hits += 1
-        queryPhrase, word = generateQuery(phrases)
-    else: 
-        print(r'\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\')
-        print(f'Errado. o correto é "{word}"')
-        misses += 1
-        print('////////////////////////////////////////////////////')
-    total = misses + hits
-    print(f'{hits} acertos de {total}: ({(hits/total):.2%}) \n')
 
 
 

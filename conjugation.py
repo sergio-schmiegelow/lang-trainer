@@ -115,20 +115,20 @@ class regVerbesClass:
     #--------------------------------------------------------------------
     def createDefinedQuery(self, verb, person, tense):
         conjugated = self.getDefinedConjugation( verb, tense, person)
-        query =  f'verbe: {verb} (en:{self.getConjugations(verb)["english"]} | pt:{self.ptTransDict[verb]})\n'
-        query += f'personne: {person}\n'
-        query += f'temp: {tense}\n'
-        query += f'___________ {random.choice(self.complements[tense])}'
+        statement =  f'verbe: {verb} (en:{self.getConjugations(verb)["english"]} | pt:{self.ptTransDict[verb]})\n'
+        statement += f'personne: {person}\n'
+        statement += f'temp: {tense}'
+        prePhrase = ''
+        postPhrase = random.choice(self.complements[tense])
         answer = conjugated
-        return query, answer
+        hint = None
+        return statement, prePhrase, [answer], postPhrase, hint
     #-------------------------------------------------------------------------
     def getQuery(self):
         verb   = random.choice(self.regularVerbsList)
         person = random.choice(list(self.peopleDict.keys()))
         tense  = random.choice(self.tenses)
-        query, answer = self.createDefinedQuery(verb, person, tense)
-        hint = None
-        return query, [answer], hint
+        return self.createDefinedQuery(verb, person, tense)
     #-------------------------------------------------------------------------
     def generateTestTemplate(self, verbs):
         testDict = {}  
@@ -158,15 +158,14 @@ class regVerbesClass:
 #-------------------------------------------------------------------------
 if __name__ == '__main__':
     rv = regVerbesClass()
-    rv.testTemplate(['manger', 'aimer', 'se brosser', "s'appeler"])
-    quit()
-    for verb in rv. regularVerbsList:
+    #rv.testTemplate(['manger', 'aimer', 'se brosser', "s'appeler"])
+    #quit()
+    for verb in rv.regularVerbsList:
         for person in rv.peopleDict.keys():
             print('-------------------------------------')
-            query, answer = rv.createDefinedQuery(verb, person,'présent')
-            print(query)
-            print(answer)
-    #with open('verbs_test_file.json', 'wt') as f:
-    #        json.dump(testDict, f, ensure_ascii=False, indent = 2)
+            statement, prePhrase, [answer], postPhrase, hint = rv.createDefinedQuery(verb, person,'présent')
+            print(statement)
+            print(prePhrase + '{' + answer + '} ' + postPhrase)
+    
     
 
