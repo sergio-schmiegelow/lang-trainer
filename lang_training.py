@@ -29,8 +29,8 @@ class templateQueryGeneratorClass:
         start, end = fillers[index]
         answer = phrase[start + 1: end - 1]
         #replace the filler
-        prePhrase  = self.removeBraces(phrase[:start])
-        postPhrase = self.removeBraces(phrase[end:])
+        prePhrase  = self.removeBraces(phrase[:start]).strip()
+        postPhrase = self.removeBraces(phrase[end:]).strip()
         if prePhrase.startswith('('):
             parClose = prePhrase.index(')')
             statement = prePhrase[1: parClose]
@@ -60,16 +60,21 @@ class queryGeneratorClass:
 #-------------------------------------------------------------------------
 if __name__ == '__main__':
     generator = queryGeneratorClass()
-    generator.addSource(regVerbesClass(),                                  1)
+    #generator.addSource(regVerbesClass(),                                  1)
     #generator.addSource(templateQueryGeneratorClass('interrogatif.ltr'),   3)
     #generator.addSource(templateQueryGeneratorClass('famille.ltr'),        3)
-    #generator.addSource(templateQueryGeneratorClass('genres.ltr'),         3)
+    generator.addSource(templateQueryGeneratorClass('genres.ltr'),         3)
     hits = 0
     misses = 0
     statement, prePhrase, answers, postPhrase, hint = generator.getQuery()
     while True:
         print('----------------------------------------------------')
-        query = statement + '\n' + prePhrase + ' ' + QUERY_SPACE + postPhrase
+        print(f'statement  = "{statement}"')
+        print(f'prePhrase  = "{prePhrase}"')
+        print(f'answer     = "{answers[0]}"')
+        print(f'postPhrase = "{postPhrase}"')
+        print(f'hint       = "{hint}"')
+        query = statement + '\n' + prePhrase + ' ' + QUERY_SPACE + ' ' + postPhrase
         print(query)
         cand = input()
         if True:#cand.strip().lower() in answers:

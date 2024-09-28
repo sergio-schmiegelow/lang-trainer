@@ -164,6 +164,11 @@ if __name__ == '__main__':
         for person in rv.peopleDict.keys():
             print('-------------------------------------')
             statement, prePhrase, [answer], postPhrase, hint = rv.createDefinedQuery(verb, person,'présent')
+            print(f'statement  = "{statement}"')
+            print(f'prePhrase  = "{prePhrase}"')
+            print(f'answer     = "{answer}"')
+            print(f'postPhrase = "{postPhrase}"')
+            print(f'hint       = "{hint}"')
             print(statement)
             print(prePhrase + '{' + answer + '} ' + postPhrase)
     
