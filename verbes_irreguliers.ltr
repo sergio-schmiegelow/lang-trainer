@@ -1,0 +1,59 @@
+(verbe être, present, personne:Je   ) {je suis} Brésilien
+(verbe être, present, personne:Tu   ) {tu es} Français
+(verbe être, present, personne:Il   ) {il est} étudiant 
+(verbe être, present, personne:Elle ) {elle est} étudiant 
+(verbe être, present, personne:On   ) {on est} étudiant 
+(verbe être, present, personne:Nous ) {nous sommes} à l’Alliance Française
+(verbe être, present, personne:Vous ) {vous êtes} très intelligent
+(verbe être, present, personne:Ils  ) {ils sont} élèves
+(verbe être, present, personne:Elles) {elles sont} élèves très intelligentes
+
+(verbe avoir, present, personne:Je   ) {J’ai} une voiture
+(verbe avoir, present, personne:Tu   ) {Tu as} un livre
+(verbe avoir, present, personne:Il   ) {Il a} une belle maison
+(verbe avoir, present, personne:Elle ) {Elle a} une belle maison.
+(verbe avoir, present, personne:On   ) {On a} une belle maison.
+(verbe avoir, present, personne:Nous ) {Nous avons} beau fils
+(verbe avoir, present, personne:Vous ) {Vous avez} un vélo 
+(verbe avoir, present, personne:Ils  ) {Ils ont} beaucoup d'argent
+(verbe avoir, present, personne:Elles) {Elles ont} beaucoup d'argent
+
+(verbe pourvoir, present, personne:Je   ) {Je peux} parler française
+(verbe pourvoir, present, personne:Tu   ) {Tu peux} faire du vélo
+(verbe pourvoir, present, personne:Il   ) {Il peut} voyager beaucoup
+(verbe pourvoir, present, personne:Elle ) {Elle peut} voyager beaucoup
+(verbe pourvoir, present, personne:On   ) {On peut} voyager beaucoup
+(verbe pourvoir, present, personne:Nous ) {Nous pouvons} courir un marathon
+(verbe pourvoir, present, personne:Vous ) {Vous pouvez} m’appeler quand voulez
+(verbe pourvoir, present, personne:Ils  ) {Ils peuvent} chanter très bien 
+(verbe pourvoir, present, personne:Elles) {Elles peuvent} chanter très bien 
+
+(verbe aller, present, personne:Je   ) {Je vais} à Biguaçu
+(verbe aller, present, personne:Tu   ) {Tu vas} à Paris
+(verbe aller, present, personne:Il   ) {Il va} aux États-Unis
+(verbe aller, present, personne:Elle ) {Elle va} aux États-Unis
+(verbe aller, present, personne:On   ) {On va} aux États-Unis
+(verbe aller, present, personne:Nous ) {Nous allons} à la fête
+(verbe aller, present, personne:Vous ) {Vous allez} à la maison
+(verbe aller, present, personne:Ils  ) {Ils vont} à l’Allemagne
+(verbe aller, present, personne:Elles) {Elles vont} à l’Allemagne
+
+(verbe venir, present, personne:Je   ) {Je viens} du Brésil
+(verbe venir, present, personne:Tu   ) {Tu viens} de la France
+(verbe venir, present, personne:Il   ) {Il vient} des États-Unis
+(verbe venir, present, personne:Elle ) {Elle vient} des États-Unis
+(verbe venir, present, personne:On   ) {On vient} des États-Unis
+(verbe venir, present, personne:Nous ) {Nous venons} de tout le monde
+(verbe venir, present, personne:Vous ) {Vous venez} d’Italie 
+(verbe venir, present, personne:Ils  ) {Ils viennent} d’Africa
+(verbe venir, present, personne:Elles) {Elles viennent} d’Africa
+
+(verbe aimer, present, personne:Je   ) {J'aime} le Français
+(verbe aimer, present, personne:Tu   ) {Tu aimes} le chocolat
+(verbe aimer, present, personne:Il   ) {Il aime} la musique
+(verbe aimer, present, personne:Elle ) {Elle aime} la musique
+(verbe aimer, present, personne:On   ) {on aime} la musique
+(verbe aimer, present, personne:Nous ) {Nous aimons} voyager
+(verbe aimer, present, personne:Vous ) {Vous aimez} voyager
+(verbe aimer, present, personne:Ils  ) {Ils aiment} la cuisine Brésilienne
+(verbe aimer, present, personne:Elles) {Elles aiment} la cuisine Brésilienne

@@ -19,8 +19,8 @@
 (interrogatif) Voici dix modèles. {Lesquels} préférez-vous ? 
 (interrogatif) {Laquelle} de ces robes est la plus belle ? 
 (interrogatif) {Lequel} de ces deux bus dois-je prendre pour aller à Lyon ? 
-(interrogatif) {Où} veux-tu manger ? 
-(interrogatif) {Où} est-ce qu'ils habitent ? 
+(interrogatif) {Où} veux-tu manger ? 
+(interrogatif) {Où} est-ce qu'ils habitent ? 
 (interrogatif) {Où} va ce train ? 
 (interrogatif) {Où} sont les toilettes, s'il vous plaît ? 
 (interrogatif) {Quand} reviendras-tu ? 

@@ -12,7 +12,7 @@ class mainApp(QWidget):
         super().__init__()
 
         self.setWindowTitle("Formation en langue française")
-        #self.setGeometry(100, 100, 800, 600)
+        self.setGeometry(100, 100, 600, 100)
         self.mainLayout = QVBoxLayout()
         self.setLayout(self.mainLayout)
         self.statementLabel = QLabel('statement')
@@ -39,15 +39,18 @@ class mainApp(QWidget):
         self.scoreLayout = QVBoxLayout()
         self.hitsLabel   = QLabel('Succès: 0')
         self.missesLabel = QLabel('Erreurs: 0')
+        self.percentageLabel = QLabel('')
+        self.percentageLabel.setVisible(False)
         self.scoreLayout.addWidget(self.hitsLabel)
         self.scoreLayout.addWidget(self.missesLabel)
+        self.scoreLayout.addWidget(self.percentageLabel)
         self.mainLayout.addLayout(self.scoreLayout)
 
         self.generator = queryGeneratorClass()
-        self.generator.addSource(regVerbesClass(),                                  1)
+        #self.generator.addSource(regVerbesClass(),                                  1)
         self.generator.addSource(templateQueryGeneratorClass('interrogatif.ltr'),   1)
-        self.generator.addSource(templateQueryGeneratorClass('famille.ltr'),        1)
-        self.generator.addSource(templateQueryGeneratorClass('genres.ltr'),         1)
+        #self.generator.addSource(templateQueryGeneratorClass('famille.ltr'),        1)
+        #self.generator.addSource(templateQueryGeneratorClass('genres.ltr'),         1)
         self.hits = 0
         self.misses = 0
         self.setQuery()
@@ -71,6 +74,9 @@ class mainApp(QWidget):
             self.reportMiss()
             self.validationLabel.setText(f'Faux. Le bon est "{self.answers[0]}"')
             self.validationLabel.setStyleSheet("color: red;")
+        percentage = round((self.hits / (self.hits + self.misses)) * 100 )
+        self.percentageLabel.setText(f'{percentage}%')
+        self.percentageLabel.setVisible(True)
     #---------------------------------------------------------------------
     def reportHit(self):
         self.hits += 1
