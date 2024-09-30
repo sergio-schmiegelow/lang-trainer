@@ -1,6 +1,7 @@
 import PyQt5
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer
+import random
 import sys
 
 from lang_training import templateQueryGeneratorClass,  queryGeneratorClass
@@ -46,17 +47,20 @@ class mainApp(QWidget):
         self.scoreLayout.addWidget(self.percentageLabel)
         self.mainLayout.addLayout(self.scoreLayout)
 
-        self.generator = queryGeneratorClass()
-        #self.generator.addSource(regVerbesClass(),                                  1)
-        self.generator.addSource(templateQueryGeneratorClass('interrogatif.ltr'),   1)
-        #self.generator.addSource(templateQueryGeneratorClass('famille.ltr'),        1)
-        #self.generator.addSource(templateQueryGeneratorClass('genres.ltr'),         1)
+        self.sourcesList = []
+        self.addSource(regVerbesClass(),                                      'verbes réguliers',   1)
+        self.addSource(templateQueryGeneratorClass('verbes_irreguliers.ltr'), 'verbes irréguliers', 1)
+        self.addSource(templateQueryGeneratorClass('interrogatif.ltr'),       'interrogatifs',      1)
+        self.addSource(templateQueryGeneratorClass('famille.ltr'),            'famille',            1)
+        self.addSource(templateQueryGeneratorClass('genres.ltr'),             'genres',             1)
+        self.addSource(templateQueryGeneratorClass('pays.ltr'),               'pays',               1)
+
         self.hits = 0
         self.misses = 0
         self.setQuery()
     #---------------------------------------------------------------------
     def setQuery(self):
-        statement, prePhrase, self.answers, postPhrase, hint = self.generator.getQuery()
+        statement, prePhrase, self.answers, postPhrase, hint = self.getQuery()
         self.statementLabel.setText(statement)
         self.prePhraseLabel.setText(prePhrase)
         self.answerInput.setText('')
@@ -85,6 +89,15 @@ class mainApp(QWidget):
     def reportMiss(self):
         self.misses += 1
         self.missesLabel.setText(f'Erreurs: {self.misses}')
+    #---------------------------------------------------------------------
+    def addSource(self, source, label, weight):
+        sourceDict = {'source':source, 'label':label, 'weight':weight}
+        self.sourcesList.append(sourceDict)
+    #---------------------------------------------------------------------
+    def getQuery(self):
+        sourcesList = [i['source'] for i in self.sourcesList]
+        weightsList = [i['weight'] for i in self.sourcesList]
+        return random.choices(sourcesList, weights = weightsList)[0].getQuery()
 #-------------------------------------------------------------------------
 def main():
     app = QApplication(sys.argv)
