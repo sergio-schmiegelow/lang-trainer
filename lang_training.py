@@ -15,9 +15,7 @@ class templateQueryGeneratorClass:
                     self.phrases.append(line.strip())
     #-------------------------------------------------------------------------
     def getFillers(self, phrase):
-        print(f'DEBUG - phrase(1) = {phrase}')
         #phrase = phrase.replace(r'\n', '\n')
-        print(f'DEBUG - phrase(2) = {phrase}')
         matches = []
         for res in re.finditer('{(.+?)}', phrase):
             #print(f'DEBUG - res = {res}')

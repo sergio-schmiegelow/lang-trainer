@@ -168,7 +168,6 @@ class mainApp(QWidget):
             f.write(json.dumps(self.configDict, indent = 4))
     #---------------------------------------------------------------------
     def onConfigChanged(self):
-        print(f'DEBUG - onConfigChanged')
         for rowIdx in range(1, self.sourcesGrid.rowCount()):
             #print(f'DEBUG - rowIdx = {rowIdx}')
             labelWidget = self.sourcesGrid.itemAtPosition(rowIdx, 0).widget()
