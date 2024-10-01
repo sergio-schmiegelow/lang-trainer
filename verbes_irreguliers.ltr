@@ -1,59 +1,59 @@
-(verbe être, present, personne:Je   ) {je suis} Brésilien
-(verbe être, present, personne:Tu   ) {tu es} Français
-(verbe être, present, personne:Il   ) {il est} étudiant 
-(verbe être, present, personne:Elle ) {elle est} étudiant 
-(verbe être, present, personne:On   ) {on est} étudiant 
-(verbe être, present, personne:Nous ) {nous sommes} à l’Alliance Française
-(verbe être, present, personne:Vous ) {vous êtes} très intelligent
-(verbe être, present, personne:Ils  ) {ils sont} élèves
-(verbe être, present, personne:Elles) {elles sont} élèves très intelligentes
+(verbe être [pt:ser/estar]\n personne:Je   \n temp:present) {je suis} Brésilien
+(verbe être [pt:ser/estar]\n personne:Tu   \n temp:present) {tu es} Français
+(verbe être [pt:ser/estar]\n personne:Il   \n temp:present) {il est} étudiant 
+(verbe être [pt:ser/estar]\n personne:Elle \n temp:present) {elle est} étudiant 
+(verbe être [pt:ser/estar]\n personne:On   \n temp:present) {on est} étudiant 
+(verbe être [pt:ser/estar]\n personne:Nous \n temp:present) {nous sommes} à l’Alliance Française
+(verbe être [pt:ser/estar]\n personne:Vous \n temp:present) {vous êtes} très intelligent
+(verbe être [pt:ser/estar]\n personne:Ils  \n temp:present) {ils sont} élèves
+(verbe être [pt:ser/estar]\n personne:Elles\n temp:present) {elles sont} élèves très intelligentes
 
-(verbe avoir, present, personne:Je   ) {J’ai} une voiture
-(verbe avoir, present, personne:Tu   ) {Tu as} un livre
-(verbe avoir, present, personne:Il   ) {Il a} une belle maison
-(verbe avoir, present, personne:Elle ) {Elle a} une belle maison.
-(verbe avoir, present, personne:On   ) {On a} une belle maison.
-(verbe avoir, present, personne:Nous ) {Nous avons} beau fils
-(verbe avoir, present, personne:Vous ) {Vous avez} un vélo 
-(verbe avoir, present, personne:Ils  ) {Ils ont} beaucoup d'argent
-(verbe avoir, present, personne:Elles) {Elles ont} beaucoup d'argent
+(verbe avoir [pt:ter]\n personne:Je   \n temp:present) {J’ai} une voiture
+(verbe avoir [pt:ter]\n personne:Tu   \n temp:present) {Tu as} un livre
+(verbe avoir [pt:ter]\n personne:Il   \n temp:present) {Il a} une belle maison
+(verbe avoir [pt:ter]\n personne:Elle \n temp:present) {Elle a} une belle maison.
+(verbe avoir [pt:ter]\n personne:On   \n temp:present) {On a} une belle maison.
+(verbe avoir [pt:ter]\n personne:Nous \n temp:present) {Nous avons} beau fils
+(verbe avoir [pt:ter]\n personne:Vous \n temp:present) {Vous avez} un vélo 
+(verbe avoir [pt:ter]\n personne:Ils  \n temp:present) {Ils ont} beaucoup d'argent
+(verbe avoir [pt:ter]\n personne:Elles\n temp:present) {Elles ont} beaucoup d'argent
 
-(verbe pourvoir, present, personne:Je   ) {Je peux} parler française
-(verbe pourvoir, present, personne:Tu   ) {Tu peux} faire du vélo
-(verbe pourvoir, present, personne:Il   ) {Il peut} voyager beaucoup
-(verbe pourvoir, present, personne:Elle ) {Elle peut} voyager beaucoup
-(verbe pourvoir, present, personne:On   ) {On peut} voyager beaucoup
-(verbe pourvoir, present, personne:Nous ) {Nous pouvons} courir un marathon
-(verbe pourvoir, present, personne:Vous ) {Vous pouvez} m’appeler quand voulez
-(verbe pourvoir, present, personne:Ils  ) {Ils peuvent} chanter très bien 
-(verbe pourvoir, present, personne:Elles) {Elles peuvent} chanter très bien 
+(verbe pourvoir [pt:poder]\n personne:Je   \n temp:present) {Je peux} parler française
+(verbe pourvoir [pt:poder]\n personne:Tu   \n temp:present) {Tu peux} faire du vélo
+(verbe pourvoir [pt:poder]\n personne:Il   \n temp:present) {Il peut} voyager beaucoup
+(verbe pourvoir [pt:poder]\n personne:Elle \n temp:present) {Elle peut} voyager beaucoup
+(verbe pourvoir [pt:poder]\n personne:On   \n temp:present) {On peut} voyager beaucoup
+(verbe pourvoir [pt:poder]\n personne:Nous \n temp:present) {Nous pouvons} courir un marathon
+(verbe pourvoir [pt:poder]\n personne:Vous \n temp:present) {Vous pouvez} m’appeler quand voulez
+(verbe pourvoir [pt:poder]\n personne:Ils  \n temp:present) {Ils peuvent} chanter très bien 
+(verbe pourvoir [pt:poder]\n personne:Elles\n temp:present) {Elles peuvent} chanter très bien 
 
-(verbe aller, present, personne:Je   ) {Je vais} à Biguaçu
-(verbe aller, present, personne:Tu   ) {Tu vas} à Paris
-(verbe aller, present, personne:Il   ) {Il va} aux États-Unis
-(verbe aller, present, personne:Elle ) {Elle va} aux États-Unis
-(verbe aller, present, personne:On   ) {On va} aux États-Unis
-(verbe aller, present, personne:Nous ) {Nous allons} à la fête
-(verbe aller, present, personne:Vous ) {Vous allez} à la maison
-(verbe aller, present, personne:Ils  ) {Ils vont} à l’Allemagne
-(verbe aller, present, personne:Elles) {Elles vont} à l’Allemagne
+(verbe aller [pt:ir]\n personne:Je   \n temp:present) {Je vais} à Biguaçu
+(verbe aller [pt:ir]\n personne:Tu   \n temp:present) {Tu vas} à Paris
+(verbe aller [pt:ir]\n personne:Il   \n temp:present) {Il va} aux États-Unis
+(verbe aller [pt:ir]\n personne:Elle \n temp:present) {Elle va} aux États-Unis
+(verbe aller [pt:ir]\n personne:On   \n temp:present) {On va} aux États-Unis
+(verbe aller [pt:ir]\n personne:Nous \n temp:present) {Nous allons} à la fête
+(verbe aller [pt:ir]\n personne:Vous \n temp:present) {Vous allez} à la maison
+(verbe aller [pt:ir]\n personne:Ils  \n temp:present) {Ils vont} à l’Allemagne
+(verbe aller [pt:ir]\n personne:Elles\n temp:present) {Elles vont} à l’Allemagne
 
-(verbe venir, present, personne:Je   ) {Je viens} du Brésil
-(verbe venir, present, personne:Tu   ) {Tu viens} de la France
-(verbe venir, present, personne:Il   ) {Il vient} des États-Unis
-(verbe venir, present, personne:Elle ) {Elle vient} des États-Unis
-(verbe venir, present, personne:On   ) {On vient} des États-Unis
-(verbe venir, present, personne:Nous ) {Nous venons} de tout le monde
-(verbe venir, present, personne:Vous ) {Vous venez} d’Italie 
-(verbe venir, present, personne:Ils  ) {Ils viennent} d’Africa
-(verbe venir, present, personne:Elles) {Elles viennent} d’Africa
+(verbe venir [pt:vir]\n personne:Je   \n temp:present) {Je viens} du Brésil
+(verbe venir [pt:vir]\n personne:Tu   \n temp:present) {Tu viens} de la France
+(verbe venir [pt:vir]\n personne:Il   \n temp:present) {Il vient} des États-Unis
+(verbe venir [pt:vir]\n personne:Elle \n temp:present) {Elle vient} des États-Unis
+(verbe venir [pt:vir]\n personne:On   \n temp:present) {On vient} des États-Unis
+(verbe venir [pt:vir]\n personne:Nous \n temp:present) {Nous venons} de tout le monde
+(verbe venir [pt:vir]\n personne:Vous \n temp:present) {Vous venez} d’Italie 
+(verbe venir [pt:vir]\n personne:Ils  \n temp:present) {Ils viennent} d’Africa
+(verbe venir [pt:vir]\n personne:Elles\n temp:present) {Elles viennent} d’Africa
 
-(verbe aimer, present, personne:Je   ) {J'aime} le Français
-(verbe aimer, present, personne:Tu   ) {Tu aimes} le chocolat
-(verbe aimer, present, personne:Il   ) {Il aime} la musique
-(verbe aimer, present, personne:Elle ) {Elle aime} la musique
-(verbe aimer, present, personne:On   ) {on aime} la musique
-(verbe aimer, present, personne:Nous ) {Nous aimons} voyager
-(verbe aimer, present, personne:Vous ) {Vous aimez} voyager
-(verbe aimer, present, personne:Ils  ) {Ils aiment} la cuisine Brésilienne
-(verbe aimer, present, personne:Elles) {Elles aiment} la cuisine Brésilienne
+(verbe vouloir [pt:querer]\n persone:Je   \n temp:present) {Je veux} voyager à Paris
+(verbe vouloir [pt:querer]\n persone:Tu   \n temp:present) {Tu veux} voyager à Paris
+(verbe vouloir [pt:querer]\n persone:Il   \n temp:present) {Il veut} voyager à Paris
+(verbe vouloir [pt:querer]\n persone:Elle \n temp:present) {Elle veut} voyager à Paris
+(verbe vouloir [pt:querer]\n persone:On   \n temp:present) {On veut} voyager à Paris
+(verbe vouloir [pt:querer]\n persone:Nous \n temp:present) {Nous voulons} voyager à Paris
+(verbe vouloir [pt:querer]\n persone:Vous \n temp:present) {Vous voulez} voyager à Paris
+(verbe vouloir [pt:querer]\n persone:Ils  \n temp:present) {Ils veulent} voyager à Paris
+(verbe vouloir [pt:querer]\n persone:Elles\n temp:present) {Elles veulent} voyager à Paris

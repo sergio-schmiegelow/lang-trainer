@@ -1,10 +1,10 @@
 {
     "weights": {
-        "verbes r\u00e9guliers": 1,
+        "verbes r\u00e9guliers": 0,
         "verbes irr\u00e9guliers": 1,
-        "interrogatifs": 1,
-        "famille": 1,
-        "genres": 1,
-        "pays": 1
+        "interrogatifs": 0,
+        "famille": 0,
+        "genres": 0,
+        "pays": 0
     }
 }
