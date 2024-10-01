@@ -1,11 +1,13 @@
-import PyQt5
+import json
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import QTimer
+from PyQt5.QtCore import Qt, QTimer, QSize
+from PyQt5.QtGui import *
 import random
 import sys
 
 from lang_training import templateQueryGeneratorClass,  queryGeneratorClass
 from conjugation import regVerbesClass
+CONFIG_FILENAME = 'config.json'
 #-------------------------------------------------------------------------
 class mainApp(QWidget):
     #---------------------------------------------------------------------
@@ -14,9 +16,20 @@ class mainApp(QWidget):
 
         self.setWindowTitle("Formation en langue française")
         self.setGeometry(100, 100, 600, 100)
+        self.setFixedHeight(250)
         self.mainLayout = QVBoxLayout()
         self.setLayout(self.mainLayout)
+
+        self.restartButtonLayout = QHBoxLayout()
+        self.restartButton = QPushButton('Redémarrer')
+        self.restartButton.clicked.connect(self.onRestart)
+        self.restartButtonLayout.addWidget(self.restartButton)
+        self.restartButtonLayout.addStretch()
+        self.mainLayout.addLayout(self.restartButtonLayout)
+
+        self.statementLayout = QVBoxLayout()
         self.statementLabel = QLabel('statement')
+        self.statementLayout.addChildWidget(self.statementLabel)
         self.mainLayout.addWidget(self.statementLabel)
 
         self.queryLayout = QHBoxLayout()
@@ -38,26 +51,46 @@ class mainApp(QWidget):
         self.mainLayout.addLayout(self.validationLayout)
 
         self.scoreLayout = QVBoxLayout()
-        self.hitsLabel   = QLabel('Succès: 0')
-        self.missesLabel = QLabel('Erreurs: 0')
-        self.percentageLabel = QLabel('')
+        self.hitsLabel   = QLabel('')
+        self.missesLabel = QLabel('')
+        self.percentageLabel = QLabel('Paramètres')
         self.percentageLabel.setVisible(False)
         self.scoreLayout.addWidget(self.hitsLabel)
         self.scoreLayout.addWidget(self.missesLabel)
         self.scoreLayout.addWidget(self.percentageLabel)
         self.mainLayout.addLayout(self.scoreLayout)
 
-        self.sourcesList = []
-        self.addSource(regVerbesClass(),                                      'verbes réguliers',   1)
-        self.addSource(templateQueryGeneratorClass('verbes_irreguliers.ltr'), 'verbes irréguliers', 1)
-        self.addSource(templateQueryGeneratorClass('interrogatif.ltr'),       'interrogatifs',      1)
-        self.addSource(templateQueryGeneratorClass('famille.ltr'),            'famille',            1)
-        self.addSource(templateQueryGeneratorClass('genres.ltr'),             'genres',             1)
-        self.addSource(templateQueryGeneratorClass('pays.ltr'),               'pays',               1)
+        self.configButtonLayout = QHBoxLayout()
+        self.configButton = QPushButton('Configuration')
+        self.configButton.clicked.connect(self.onConfigButton)
+        self.configButton.setCheckable(True)
+        self.configButton.setChecked(False)
+        self.configButtonLayout.addWidget(self.configButton)
+        self.configButtonLayout.addStretch()
+        self.mainLayout.addLayout(self.configButtonLayout)
 
+        self.configWidget = QWidget() #To hide the layout
+        self.configWidget.setVisible(False) 
+        self.configLayout = QHBoxLayout(self.configWidget)
+        self.sourcesList = []
+        self.addSource(regVerbesClass(),                                      'verbes réguliers')
+        self.addSource(templateQueryGeneratorClass('verbes_irreguliers.ltr'), 'verbes irréguliers')
+        self.addSource(templateQueryGeneratorClass('interrogatif.ltr'),       'interrogatifs')
+        self.addSource(templateQueryGeneratorClass('famille.ltr'),            'famille')
+        self.addSource(templateQueryGeneratorClass('genres.ltr'),             'genres')
+        self.addSource(templateQueryGeneratorClass('pays.ltr'),               'pays')
+        self.mainLayout.addWidget(self.configWidget)
+        self.createSourcesGrid()
+
+        self.onRestart()
+    #---------------------------------------------------------------------
+    def onRestart(self):
         self.hits = 0
         self.misses = 0
         self.setQuery()
+        self.hitsLabel.setText('Succès: 0')
+        self.missesLabel.setText('Erreurs: 0')
+        self.percentageLabel.setVisible(False)
     #---------------------------------------------------------------------
     def setQuery(self):
         statement, prePhrase, self.answers, postPhrase, hint = self.getQuery()
@@ -90,14 +123,66 @@ class mainApp(QWidget):
         self.misses += 1
         self.missesLabel.setText(f'Erreurs: {self.misses}')
     #---------------------------------------------------------------------
-    def addSource(self, source, label, weight):
-        sourceDict = {'source':source, 'label':label, 'weight':weight}
+    def addSource(self, source, label):
+        sourceDict = {'source':source, 'label':label}
         self.sourcesList.append(sourceDict)
     #---------------------------------------------------------------------
     def getQuery(self):
         sourcesList = [i['source'] for i in self.sourcesList]
-        weightsList = [i['weight'] for i in self.sourcesList]
+        labelsList  = [i['label']  for i in self.sourcesList]
+        weightsList = [self.configDict['weights'][label] for label in labelsList]
         return random.choices(sourcesList, weights = weightsList)[0].getQuery()
+    #---------------------------------------------------------------------
+    def createSourcesGrid(self):
+        with open(CONFIG_FILENAME, 'rt') as f:
+            self.configDict = json.load(f)
+        self.sourcesGrid = QGridLayout()
+        self.sourcesGrid.addWidget(QLabel('Thème'), 0, 0, alignment = Qt.AlignLeft)
+        self.sourcesGrid.addWidget(QLabel('Poids'), 0, 1)
+        for idx, sourceDict in enumerate(self.sourcesList):
+            sourceDict['sourceLabel'] = QLabel(sourceDict['label'])
+            sourceDict['weightSelector'] = QSpinBox()
+            sourceDict['weightSelector'].setRange(0, 99)
+            sourceDict['weightSelector'].setValue(self.configDict['weights'][sourceDict['label']])
+            sourceDict['weightSelector'].valueChanged.connect(self.onConfigChanged)
+            self.sourcesGrid.addWidget(sourceDict['sourceLabel'],    idx + 1, 0, alignment = Qt.AlignLeft)
+            self.sourcesGrid.addWidget(sourceDict['weightSelector'], idx + 1, 1, alignment = Qt.AlignRight)
+        self.configLayout.addLayout(self.sourcesGrid)
+        self.configLayout.addStretch()
+        self.onConfigChanged()
+    #---------------------------------------------------------------------
+    def onConfigButton(self):
+        with open(CONFIG_FILENAME, 'rt') as f:
+            self.configDict = json.load(f)
+        if self.configButton.isChecked():
+            self.configWidget.setVisible(True)
+            self.configButton.setText('Fermer la configuration')
+            self.setFixedHeight(450)
+        else:
+            self.configWidget.setVisible(False)
+            self.configButton.setText('Configuration')
+            self.setFixedHeight(250)
+    #---------------------------------------------------------------------
+    def saveConfig(self):
+        with open(CONFIG_FILENAME, 'wt') as f:
+            f.write(json.dumps(self.configDict, indent = 4))
+    #---------------------------------------------------------------------
+    def onConfigChanged(self):
+        print(f'DEBUG - onConfigChanged')
+        for rowIdx in range(1, self.sourcesGrid.rowCount()):
+            #print(f'DEBUG - rowIdx = {rowIdx}')
+            labelWidget = self.sourcesGrid.itemAtPosition(rowIdx, 0).widget()
+            label = labelWidget.text()
+            value = int(self.sourcesGrid.itemAtPosition(rowIdx, 1).widget().text())
+            if value == 0:
+                labelWidget.setStyleSheet("color: gray")
+            else:
+                labelWidget.setStyleSheet("color: black")
+            #print(f'label = {label}')
+            #print(f'value = {value}')
+            #print(f'type(value) = {type(value)}')
+            self.configDict['weights'][label] = value
+        self.saveConfig()
 #-------------------------------------------------------------------------
 def main():
     app = QApplication(sys.argv)
