@@ -101,7 +101,7 @@ class mainApp(QWidget):
         self.validationLabel.setText('')
     #---------------------------------------------------------------------
     def validadeAnswer(self):
-        typedAnswer = self.answerInput.text().strip()
+        typedAnswer = self.answerInput.text().strip().lower()
         if typedAnswer in self.answers:
             self.reportHit()
             self.validationLabel.setText('Correct!')
