@@ -10,6 +10,8 @@ class templateQueryGeneratorClass:
         with open(filename) as fp:
             lines = fp.readlines()
             for line in lines:
+                if sys.platform == 'win32':
+                    line = line.encode('ISO-8859-1', errors='ignore').decode('utf-8', errors='ignore')
                 line = line.strip()
                 if len(line.strip()) > 0:
                     self.phrases.append(line.strip())

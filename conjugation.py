@@ -3,6 +3,7 @@
 import csv
 import json
 import random
+import sys
 from unidecode import unidecode
 from verbecc import Conjugator
 #-------------------------------------------------------------------------
@@ -12,7 +13,14 @@ class regVerbesClass:
         self.tenses = ['présent', 'passé-composé', 'futur-proxe']
         with open('verbs_translations.csv', 'rt') as f:
             reader = csv.DictReader(f)
-            self.ptTransDict = {row['french']:row['portuguese'] for row in reader}
+            if sys.platform == 'win32':
+                self.ptTransDict = {}
+                for row in reader:
+                    key   = row['french'].encode('ISO-8859-1', errors='ignore').decode('utf-8', errors='ignore')
+                    value = row['portuguese'].encode('ISO-8859-1', errors='ignore').decode('utf-8', errors='ignore')
+                    self.ptTransDict[key] = value
+            else:
+                self.ptTransDict = {row['french']:row['portuguese'] for row in reader}
         self.regularVerbsList = [self.convertChars(v) for v in self.ptTransDict.keys() if self.parseVerb(v)[2] in [1, 2]]
         self.peopleDict = {'je':0, 
                            'tu':1, 
