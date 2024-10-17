@@ -11,7 +11,7 @@ Installation:
 ```powershell
 git clone https://github.com/sergio-schmiegelow/lang-trainer.git
 cd lang-trainer
-python3 -m venv .env2
+py.exe -m venv .env
 .\.env\Scripts\activate
 pip install pyqt5
 pip install unidecode
